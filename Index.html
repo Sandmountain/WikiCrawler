@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Style/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="Images/favicon-32x32.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title> WikiCrawler </title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+<script src="https://unpkg.com/sweetalert2@7.22.2/dist/sweetalert2.all.js"></script>
+
+    
+<body>
+    <div id="Tutorial">
+        <div id="tutContent">
+            <p id="menuTitleText"> WELCOME TO <span class="menuLogo"> WikiCrawling</span></p>
+            <div id='line1'></div>
+            <p id="menuText">
+                The purpose of this game is to reach a chosen Wikipedia article, starting from another. This is done by clicking or selecting a section of words in the articles. Either choose your own start and finishing article, or choose a random article from a set of words sorted by different categories.
+            </p><br>
+            <p id="menuText">
+                When playing the game, you can see your current time passed and number of articles you have visited in the upper right hand corner. It's also possible to go back one article by pressing the panel in the lower left corner, this could be usefull if a word was pressed by mistake.
+            </p><br>
+            <p id="menuText">
+                The highscore is calculated by the number of clicks and time spent to reach the chosen article, so be careful, and be quick!
+            </p><br>
+            <p id="menuWarning"> ... AND REMEMBER NOT TO CHEAT!</p><br>
+            <div id='line1'></div>
+            <p id="menuUnderstand">
+                <input type="checkbox" id="c1" name="cc" />
+                <label for="c1"><span></span>I HAVE UNDERSTOOD THE RULES!</label>
+            </p>
+        </div>
+    </div>
+    <div id="Setup">
+        <script>
+            //Hides it directly when initialized
+            document.getElementById('Setup').style.display = 'none';
+        </script>
+        <div id="tutContent">
+            <p id="menuTitleText"> SELECT YOUR ARTICLES</p>
+            <div id='line1'></div>
+            <div class="paddThat">
+                <div class="switch switch-blue">
+                    <input type="radio" onclick="SwitchSelect();" class="switch-input" name="view2" value="week2" id="week2" checked>
+                    <label for="week2"  class="switch-label switch-label-off">SELECT</label>
+                    <input type="radio" onclick="SwitchRandom();" class="switch-input" name="view2" value="month2" id="month2">
+                    <label for="month2" class="switch-label switch-label-on">RANDOM</label>
+                    <span class="switch-selection"></span>
+                </div>
+            </div>
+        <div id="SelecArt">  
+            <p id="menuTextlittle">
+                Please enter your selections in the following fields and press the validate button. If the lines turns green, the choice is an existing Wikipedia article.
+            </p>
+            <div id='line1'></div>
+            <div class="inputFieldText">
+            <div id="felMeddelande"><p id="felText"></p></div>
+                <div class="field1">
+                    <input type="text" id="textStart" placeholder="Type Starting Article..." />
+                    <div class="line4"></div>
+                </div>
+                <div class="field2">
+                    <input type="text" id="textGoal" placeholder="Type Finishing Article..." />
+                    <div class="line3"></div>
+                </div>
+            </div>
+            <div class="centerButtons">
+				
+                <button onclick="validate();" class="centerMe3">VALIDATE</button> 
+
+            </div>
+			
+            
+            <div id="shortSummary"><div id='line1'></div><p id="menuTextlittle"><b>Short summary of <span id="titleForGoal" style ="text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+			color: #5bb5cd;"></span></b></p></div>
+            	<div id='line1'></div>
+                <div id="centerButtons2">
+                    <script>
+                        //Hides it directly when initialized
+                        document.getElementById('centerButtons2').style.display = 'none';
+                    </script>
+                    <button onclick="GoGame();" class="centerMe4">START GAME</button>
+                </div>
+         </div>
+            <div id="RandArt">
+                <p id="menuTextlittle">Please choose from the dropdown menu a category your goal article should be from, the starting article will always be chosen from another category.</p>
+                    <div id='line1'></div> 
+                    <div class="center">
+                       
+                      <select name="sources" id="sources" class="custom-select sources" placeholder="CATEGORIES">
+                        <option value="People">People</option>
+                        <option value="Things">Things</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Adjectives">Adjectives</option>
+                        <option value="Random">Random</option>
+                      </select>
+                    </div>
+                <div id='line10'></div> 
+                <div class="inputFieldText2">
+                    <div id="felMeddelande2"><p id="felText"></p></div>
+                    <div class="field3">
+                        <input type="text" id="textStartRand" placeholder="Select category and press Randomize for Starting Article..." />
+                        <div class="line5"></div>
+                    </div>
+                    <div class="field4">
+                        <input type="text" id="textGoalRand" placeholder="Select category and press Randomize for Finishing Article..." />
+                    <div class="line6"></div>
+                    </div>
+                    </div>
+              
+            <div class="centerButtons3">
+				
+                <button onclick="Randomize();" class="centerMe5">RANDOMIZE</button> 
+
+            </div>
+                <div id="showWhenResult">
+                <div id='line1'></div>
+                    <p id="menuTextlittle"><b>Short summary of<span id="thisOne" style ="text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+			color: #5bb5cd;"></span></b></p><div id="randSummary"></div>
+            	<div id='line1'></div>
+                <div id="centerButtons4">
+                    <script>
+                        //Hides it directly when initialized
+                        document.getElementById('centerButtons4').style.display = 'none';
+                    </script>
+                    <button onclick="GoGame();" class="centerMe4">START GAME</button>
+                </div>
+            </div>
+         </div>    
+        </div>
+    </div>
+    <div id="Ending">
+    <script>
+        //Hides it directly when initialized
+        document.getElementById('Ending').style.display = 'none';
+   	</script>
+        <!-- Ny Header -->
+        <div id="header">
+            <a href="https://tinyurl.com/yawy6vap"><image src="Images/logo.png" class="logoImage"></image></a>
+            <span class="logo">WikiCrawling </span>
+            
+           
+            <div class="topCenter">
+                
+                <p id="FinishHead" style="font-size: 30px; padding-top: 15px">GAME OVER!</p>
+            </div>
+            <button onclick="resetAll()" class="centerMe"> NEW GAME</button>
+            <button onclick="resetAll()" class="centerMe2">RESTART</button>
+        </div> 
+        <div id="keepInCenter">      
+            <div id="winningContent">
+                <p id="menuTitleText">  <span class="menuLogo"> Highscore</span></p>
+                    <div id='line1'></div>
+                    <p id="menuText" style="text-align: center">
+
+                        Your final score is: <br>
+                        <span class="countText"></span><br><br>
+                        <p id="TimeAndClicks">&nbsp</p> <br><br>
+
+                    <div id='line1'></div>
+                <p id="menuUnderstand">
+                   <button onclick="showPath();" class="MoreInfoButton">View Path</button> 
+                </p>
+            </div>
+            <div class="floatCracked"></div>
+            <div class="visitedContainer items"></div>
+            <div class="arrowContainer"><div class="leftArrow"><span id="left-button"><i id="arrowsRL" class="fas fa-angle-left"></i></span></div><div class="rightArrow"> <span id="right-button"><i id="arrowsRL" class="fas fa-angle-right"></i></span></div></div>
+        </div>
+    </div> 
+        
+    <div id="Game">
+      <script>
+        //Hides it directly when initialized
+        document.getElementById('Game').style.display = 'none';
+   	  </script>
+        <div id="header">
+            <a href="https://tinyurl.com/yawy6vap"><image src="Images/logo.png" class="logoImage"></image></a>
+            <span class="logo">WikiCrawling </span>
+            
+           
+            <div class="topCenter">
+                <p id="currentArticle">CURRENT ARTICLE</p>
+                <p id="serachedArticle"><span id="tooltiptext"></span>SEARCHING FOR ARTICLE WITH TITLE</p>
+            </div>
+            <span class="PausePosition"><i id="pauseGame" onclick="PausGame();" class="far fa-pause-circle"></i></span>
+            <button onclick="newGameConfirm();" class="centerMe"> NEW GAME</button>
+            <button onclick="resetGame();" class="centerMe2">RESTART</button>
+        </div>
+        <div class="headerTime">
+            <h3 class="timerText2"><time>00:00</time></h3>
+            <div id='lineInfo'></div>
+            <p id="titleTextInfo">TIME ELAPSED <i class="fas fa-caret-down"></i></p>
+        </div>
+        <div class="headerLinks">
+            <div id="antal" class="counterText">
+                <p class="whiteText"> articles visited</p>
+            </div>
+            <div id='lineInfo'></div>
+            <p id="titleTextInfo">NUMBER OF CLICKS <i class="fas fa-caret-down"></i></p>
+        </div>
+            <div id="lastVisited">
+                <p id="titleText2"><i class="fas fa-undo"></i> PREVIOUS ARTICLE</p>
+                <div id='line1'></div>
+                <div id="lastArticle">First Article</div>
+            </div>
+        <!--<div class="container">-->
+            <div id="artikel" ></div>
+            
+        <!--</div>-->
+        
+    </div>
+    
+    <script src="script/pageTraversal.js"></script>
+    <script src="script/1000core.js"></script>
+    <script src="script/parseJSON.js"></script>
+    <script src="script/timer.js"></script>
+    <script src="script/HighScore.js"></script>
+    <script>
+        $('input').on('focusin', function() {
+            $(this).parent().find('label').addClass('active');
+        });
+
+        $('input').on('focusout', function() {
+            if (!this.value) {
+                $(this).parent().find('label').removeClass('active');
+            }
+        });
+        
+      
+    </script>
+</body>
+
+</html>
