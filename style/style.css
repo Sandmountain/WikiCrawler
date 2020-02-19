@@ -2,7 +2,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'); 
 @font-face {
   font-family: "pfs-bold";
-  src: url("../Fonts/pfspro.otf");
+  src: url("../fonts/pfspro.otf");
 }
 
 
@@ -12,7 +12,7 @@
 
 body{
 
-	background-image: url("../Images/testBG3.jpg");
+	background-image: url("../images/testBG3.jpg");
   	background-attachment: fixed;
     font: 14px 'Open Sans', sans-serif;
     overflow-x: hidden;
